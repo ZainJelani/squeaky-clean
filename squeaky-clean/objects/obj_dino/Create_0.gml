@@ -6,7 +6,7 @@ jumping = false;
 falling = false;
 ducking = false;
 termVelocity = 100;
-extendCombo = false;
+global.extendCombo = false;
 bonusJump = 0;
 // Variables
 coyoteTimeMax = 10; // Adjust this for the duration of coyote time (e.g., 10 frames)

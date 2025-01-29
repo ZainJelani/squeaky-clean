@@ -49,10 +49,10 @@ if (onGround || onRamp) {
 
     // If the player wants to jump
     if ((jumpKey || jumpKeyAlt) && !duckKey && !duckKeyAlt && jumpCounter == 0) {
-        if (place_meeting(x, y + 1, obj_ramp)) {
+        if (place_meeting(x, y, obj_ramp)) {
             var _inst = instance_place(x, y, obj_ramp);
             if _inst != noone {
-                if (x > _inst.x + sprite_get_width(spr_water_ramp) / 4) {
+                if (x > _inst.x + sprite_get_width(spr_ramp3) / 4) {
                     jumpSound = choose(snd_special_jump_1, snd_special_jump_1);
 					audio_play_sound(jumpSound, 100, false);
 					bonusJump = 1;
@@ -64,7 +64,7 @@ if (onGround || onRamp) {
 					global.comboMultiplier += 1;
 					global.comboExtensionTimer = comboTimer;
                     score += 500 * global.comboMultiplier;
-                    extendCombo = true;
+                    global.extendCombo = true;
 					global.speedModifier += 0.002;
                 }
             }

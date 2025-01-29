@@ -114,7 +114,7 @@ if (other.object_index == obj_bubble)
     //}
 	global.comboExtensionTimer = comboTimer;
     score += 500 * global.comboMultiplier;
-    extendCombo = true;
+    //global.extendCombo = true;
 	global.speedModifier += 0.002;
 	image_angle = 20;
 	sprite_index = global.bday ? spr_squirtle_trick : spr_pika_trick;
@@ -154,7 +154,7 @@ if (y - (sprite_get_height(spr_pika_surf)/2) < other.y - collidedSprite){
 	global.comboMultiplier += 1;
 	global.comboExtensionTimer = comboTimer;
     score += 500 * global.comboMultiplier;
-    extendCombo = true;
+    global.extendCombo = true;
 	global.speedModifier += 0.002;
 	
 	bonusJump = 1;

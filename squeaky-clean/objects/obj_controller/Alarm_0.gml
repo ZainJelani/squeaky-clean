@@ -4,9 +4,10 @@ randomize();
 var count = irandom_range(1, 10);
 
 function createRamp(height, xCoord, yCoord, object){
-	var i = instance_create_layer(xCoord, yCoord, "Instances", object);
+	var i = instance_create_layer(xCoord, yCoord, "Controller", object);
 	if (object == obj_ramp){
-		i.sprite_index = spr_water_ramp;
+		i.sprite_index = spr_ramp4;
+		i.mask_index = spr_ramp3;
 	}
 	if (object == obj_bubble){
 		if(height > 550){

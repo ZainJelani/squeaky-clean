@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_ramp2",
-    "path":"sprites/spr_ramp2/spr_ramp2.yy",
+    "name":"spr_ramp4",
+    "path":"sprites/spr_ramp4/spr_ramp4.yy",
   },
   "spriteMaskId":null,
   "visible":true,
