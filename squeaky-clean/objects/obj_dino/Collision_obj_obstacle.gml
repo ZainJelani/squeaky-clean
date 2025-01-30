@@ -122,12 +122,12 @@ if (y - (sprite_get_height(spr_pika_surf)/2) < other.y - collidedSprite){
     jumping = true;
     vspd = -jspd;
     coyoteTimer = 0; // Prevent multiple jumps within coyote time
-	jumpSound = choose(snd_special_jump_1, snd_special_jump_1);
+	jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 	audio_play_sound(jumpSound, 100, false);
     global.bubbleMeter += 10;
 	global.comboMultiplier += 1;
 	global.comboExtensionTimer = comboTimer;
-    score += 500 * global.comboMultiplier;
+    score += 400 * global.comboMultiplier;
 	global.speedModifier += 0.002;
 	var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
 	bonusJump = 1;

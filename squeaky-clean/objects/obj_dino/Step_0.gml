@@ -69,7 +69,7 @@ if (onGround || onRamp) {
 					global.speedModifier += 0.002;
 					
 					if (x > _inst.x + sprite_get_width(spr_ramp3) / 2) {
-						jumpSound = choose(snd_special_jump_1, snd_special_jump_1);
+						jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 						audio_play_sound(jumpSound, 100, false);
 						global.comboMultiplier += 1;
 	                    score += 500 * global.comboMultiplier;
@@ -77,7 +77,7 @@ if (onGround || onRamp) {
 						txt.sprite_index = spr_txt_perfect; 
 					}
 					else if (x > _inst.x + sprite_get_width(spr_ramp3) / 4) {
-						jumpSound = choose(snd_special_jump_1, snd_special_jump_1);
+						jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 						audio_play_sound(jumpSound, 100, false);
 						global.comboMultiplier += 1;
 	                    score += 300 * global.comboMultiplier;
@@ -85,7 +85,7 @@ if (onGround || onRamp) {
 						txt.sprite_index = spr_txt_great; 
 					}
 					else if (x > _inst.x) {
-						jumpSound = choose(snd_special_jump_1, snd_bubble_jump_1);
+						jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 						audio_play_sound(jumpSound, 100, false);
 	                    score += 100 * global.comboMultiplier;
 						var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
@@ -119,7 +119,7 @@ if (onGround || onRamp) {
 		audio_play_sound(jumpSound, 100, false);
 		//audio_pause_sound(snd_surfing_2);
 	    if(rampTimer > 0){
-			jumpSound = choose(snd_special_jump_1, snd_special_jump_1);
+			jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 			audio_play_sound(jumpSound, 100, false);
 			bonusJump = 1;
 			global.comboMultiplier += 1;
