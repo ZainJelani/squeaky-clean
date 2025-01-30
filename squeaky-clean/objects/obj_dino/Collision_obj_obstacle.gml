@@ -57,6 +57,7 @@ if (other.object_index == obj_ramp)
 		}
 	}
 	y -= 10;
+	rampTimer = coyoteTimeMax;
 	return;
 }
 
@@ -84,41 +85,19 @@ if place_meeting(x, y + vspd, obj_ramp) {
     vspd = 0;
 }
 
-if (other.object_index == obj_combo_barrier)
-{
-	//if(extendCombo){
-	//	extendCombo = false;
-	//}
-	//else{
-	//	global.comboMultiplier = 1;	
-	//}
-	//with (other)
-	//{
-	//	instance_destroy();
-	//}
-	return;
-}
-
 if (other.object_index == obj_bubble)
 {
 	jumping = true;
     vspd = -jspd;
-    //jumpCounter++; // Increment jump counter
     coyoteTimer = 0; // Prevent multiple jumps within coyote time
 	jumpSound = choose(snd_bubble_jump_1, snd_bubble_jump_2);
 	audio_play_sound(jumpSound, 100, false);
-	//audio_pause_sound(snd_surfing_2);
-    global.bubbleMeter += 10;
-    //if (global.comboMultiplier < 16) {
-    //    global.comboMultiplier *= 2;
-    //}
 	global.comboExtensionTimer = comboTimer;
     score += 500 * global.comboMultiplier;
-    //global.extendCombo = true;
 	global.speedModifier += 0.002;
 	image_angle = 20;
 	sprite_index = global.bday ? spr_squirtle_trick : spr_pika_trick;
-	
+	var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
 	bonusJump = 1;
 	
 	audio_play_sound(snd_pop, 100, false);
@@ -136,27 +115,21 @@ if (other.object_index == obj_gastly){
 }
 
 if (other.object_index == obj_pidgy){
-	collidedSprite = sprite_get_height(spr_pidgey)*(3/2)
+	collidedSprite = sprite_get_height(spr_pidgey_2)*(3/4)
 }
 
 if (y - (sprite_get_height(spr_pika_surf)/2) < other.y - collidedSprite){
     jumping = true;
     vspd = -jspd;
-    //jumpCounter++; // Increment jump counter
     coyoteTimer = 0; // Prevent multiple jumps within coyote time
 	jumpSound = choose(snd_special_jump_1, snd_special_jump_1);
 	audio_play_sound(jumpSound, 100, false);
-	//audio_pause_sound(snd_surfing_2);
     global.bubbleMeter += 10;
-    //if (global.comboMultiplier < 16) {
-    //    global.comboMultiplier *= 2;
-    //}
 	global.comboMultiplier += 1;
 	global.comboExtensionTimer = comboTimer;
     score += 500 * global.comboMultiplier;
-    global.extendCombo = true;
 	global.speedModifier += 0.002;
-	
+	var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
 	bonusJump = 1;
 	image_angle = 20;
 	sprite_index = global.bday ? spr_squirtle_trick : spr_pika_trick;
@@ -171,7 +144,7 @@ if (y - (sprite_get_height(spr_pika_surf)/2) < other.y - collidedSprite){
 // otherwise a death object
 if (!audio_is_playing(snd_game_over_sc) && !global.gameOver)
 	audio_play_sound(snd_game_over_sc, 100, false);
-	
+	//audio_play_sound(snd_pika_death, 100, false);
 global.gameOver = true;
 global.speedModifier = 0;
 grav = 0;

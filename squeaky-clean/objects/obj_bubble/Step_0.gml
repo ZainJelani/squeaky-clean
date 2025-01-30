@@ -11,7 +11,7 @@ var frequency = 0.05; // Adjust for speed of oscillation
 var new_y = y + amplitude * sin(degtorad(current_time * frequency + phase_offset));
 
 // Set a max y limit (e.g., y can't go below 100)
-var max_y = 600;  // Change this to your desired max height
+var max_y = 540;  // Change this to your desired max height
 y = min(new_y, max_y); // Prevent y from exceeding max_y
 
 if (x < -100)
