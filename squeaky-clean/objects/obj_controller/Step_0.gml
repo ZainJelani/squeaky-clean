@@ -1,5 +1,4 @@
 global.speedModifier += 0.0002;
-global.bubbleMeter -= 0.1 * global.speedModifier;
 score += 1 * global.speedModifier;
 
 if (score > global.highScore){
@@ -8,7 +7,6 @@ if (score > global.highScore){
 	ini_write_real("HighScore", "Value", global.highScore);
 	ini_close();
 }
-
 
 layer_hspeed("Clouds", -5 * global.speedModifier);
 part_emitter_stream(global.comboPartSys, self.emitter, self.part_type, 1);

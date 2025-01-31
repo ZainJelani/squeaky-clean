@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":0.988812,
+  "duration":0.0,
   "name":"snd_jump_land",
   "parent":{
     "name":"Sounds",

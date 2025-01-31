@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_combo_barrier",
-    "path":"sprites/spr_combo_barrier/spr_combo_barrier.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":2.324898,
+  "duration":0.0,
   "name":"snd_pika_death",
   "parent":{
     "name":"Sounds",

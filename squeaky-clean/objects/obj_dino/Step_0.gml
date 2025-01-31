@@ -8,22 +8,17 @@ if(global.gameOver){
 if (global.gameOver) exit;
 
 // Controls
-jumpKey = !global.inverse ? keyboard_check_pressed(vk_space) : keyboard_check_pressed(vk_down);
-jumpKeyAlt = !global.inverse ? keyboard_check_pressed(vk_up) || keyboard_check(ord("W")) : keyboard_check_pressed(vk_alt);
-duckKey = !global.inverse ? keyboard_check(vk_down) || keyboard_check(ord("S")) : keyboard_check(vk_space);
-duckKeyAlt = !global.inverse ? keyboard_check(vk_alt) : keyboard_check(vk_up);
-
-fastFallPressed = keyboard_check_pressed(vk_down) || keyboard_check(ord("S"));
-
-forwardKey = !global.inverse ? keyboard_check(vk_right) || keyboard_check(ord("D")) : keyboard_check(vk_left);
-backKey = !global.inverse ? keyboard_check(vk_left) || keyboard_check(ord("A")) : keyboard_check(vk_right);
-
+jumpKey = keyboard_check_pressed(vk_space);
+jumpKeyAlt = keyboard_check_pressed(vk_up) || keyboard_check(ord("W"));
+duckKey = keyboard_check(vk_down) || keyboard_check(ord("S"));
+duckKeyAlt = keyboard_check(vk_alt);
+fastFallPressed = keyboard_check_pressed(vk_down) || keyboard_check_pressed(ord("S"));
+forwardKey = keyboard_check(vk_right) || keyboard_check(ord("D"));
+backKey = keyboard_check(vk_left) || keyboard_check(ord("A"));
 escapeKey = keyboard_check(vk_escape);
 
 ducking = duckKey || duckKeyAlt;
 jumping = !(duckKey && duckKeyAlt);
-
-comboTimer = 3;
 rampTimer -= 1;
 
 if(escapeKey){
@@ -45,14 +40,14 @@ if (onGround){
 
 if (onGround || onRamp) {
 	if(falling){
-		//audio_play_sound(snd_surfing_2, 100, false);
 		if(!ducking){
 			audio_play_sound(snd_jump_land, 100, false);	
 		}
 	}
+	
     // Reset coyote time and jump counter when on the ground
     coyoteTimer = coyoteTimeMax;
-    jumpCounter = 0; // Reset jump counter
+    jumpCounter = 0;
     vspd = 0;
     jumping = false;
     falling = false;
@@ -61,12 +56,12 @@ if (onGround || onRamp) {
 
     // If the player wants to jump
     if ((jumpKey || jumpKeyAlt) && !duckKey && !duckKeyAlt && jumpCounter == 0) {
-        if (place_meeting(x, y + 1, obj_ramp)) {
+        if (place_meeting(x, y, obj_ramp) || place_meeting(x, y + 3, obj_ramp) || place_meeting(x + 3, y, obj_ramp)) {
             var _inst = instance_place(x, y, obj_ramp);
             if _inst != noone {
                 if (x > _inst.x) {
 					bonusJump = 1;
-					global.speedModifier += 0.002;
+					//global.speedModifier += 0.002;
 					
 					if (x > _inst.x + sprite_get_width(spr_ramp3) / 2) {
 						jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
@@ -96,11 +91,10 @@ if (onGround || onRamp) {
         } else {
 			jumpSound = choose(snd_bubble_jump_1, snd_bubble_jump_2);
             audio_play_sound(jumpSound, 100, false);
-			//audio_pause_sound(snd_surfing_2);
         }
         jumping = true;
         vspd = -jspd;
-        jumpCounter++; // Increment jump counter
+        jumpCounter++;
     }
 } else {
     // Decrease coyote timer when in the air
@@ -112,34 +106,30 @@ if (onGround || onRamp) {
     if ((jumpKey || jumpKeyAlt) && ((coyoteTimer > 0 && jumpCounter == 0) || bonusJump == 1) && !duckKey && !duckKeyAlt) {
         jumping = true;
         vspd = -jspd;
-        jumpCounter++; // Increment jump counter
-        coyoteTimer = 0; // Prevent multiple jumps within coyote time
+        jumpCounter++;
+        coyoteTimer = 0;
 		bonusJump = 0;
         jumpSound = choose(snd_bubble_jump_1, snd_bubble_jump_2);
 		audio_play_sound(jumpSound, 100, false);
-		//audio_pause_sound(snd_surfing_2);
 	    if(rampTimer > 0){
 			jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 			audio_play_sound(jumpSound, 100, false);
 			bonusJump = 1;
 			global.comboMultiplier += 1;
-			global.comboExtensionTimer = comboTimer;
             score += 500 * global.comboMultiplier;
-			global.speedModifier += 0.002;
+			//global.speedModifier += 0.002;
 			var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
 			txt.sprite_index = spr_txt_perfect;  
 		}
     }
 
     if (fastFallPressed) {
-		
 		audio_play_sound(snd_drop_attack, 100, false);
         vspd += grav * 6;
     } else {
         if (vspd < termVelocity) {
             vspd += grav;
         }
-
         if (sign(vspd) == 1) {
             falling = true;
         }
@@ -183,15 +173,8 @@ if (forwardKey && !backKey && x < room_width) {
     hspd = 0;
 }
 
-if (x > room_width)
-	{
-		x = room_width;
-	}
-if (x < 0)
-	{
-		x = 0;
-	}
-	
+if (x > room_width) x = room_width;
+if (x < 0) x = 0;
 	
 if place_meeting(x+hspd,y,obj_ramp)
 {

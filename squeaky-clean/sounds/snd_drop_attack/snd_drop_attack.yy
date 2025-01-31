@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":1,
   "conversionMode":0,
-  "duration":0.945187,
+  "duration":0.0,
   "name":"snd_drop_attack",
   "parent":{
     "name":"Sounds",

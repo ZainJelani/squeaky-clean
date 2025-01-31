@@ -1,28 +1,5 @@
 if (global.gameOver) exit;
 
-if (other.object_index == obj_cake)
-{
-	global.bday = true;
-	with (other)
-	{
-		instance_destroy();
-	}
-	audio_play_sound(snd_cake, 100, false);
-	
-	return;
-}
-
-if (other.object_index == obj_inverse)
-{
-	global.inverse = !global.inverse;
-	with (other)
-	{
-		instance_destroy();
-	}
-		
-	return;
-}
-
 // Starting point of the vertical line
 start_x = x;      // The given x value
 start_y = 0;      // The given y value
@@ -45,7 +22,6 @@ if (collision_id != noone) {
     }
 
     collision_y = start_y; // The exact collision point
-    show_debug_message("Collision point: " + string(start_x) + ", " + string(collision_y));	
 }
 
 if (other.object_index == obj_ramp)
@@ -92,9 +68,8 @@ if (other.object_index == obj_bubble)
     coyoteTimer = 0; // Prevent multiple jumps within coyote time
 	jumpSound = choose(snd_bubble_jump_1, snd_bubble_jump_2);
 	audio_play_sound(jumpSound, 100, false);
-	global.comboExtensionTimer = comboTimer;
     score += 500 * global.comboMultiplier;
-	global.speedModifier += 0.002;
+	//global.speedModifier += 0.002;
 	image_angle = 20;
 	sprite_index = global.bday ? spr_squirtle_trick : spr_pika_trick;
 	var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
@@ -124,16 +99,13 @@ if (y - (sprite_get_height(spr_pika_surf)/2) < other.y - collidedSprite){
     coyoteTimer = 0; // Prevent multiple jumps within coyote time
 	jumpSound = choose(snd_special_jump_1, snd_special_jump_2);
 	audio_play_sound(jumpSound, 100, false);
-    global.bubbleMeter += 10;
 	global.comboMultiplier += 1;
-	global.comboExtensionTimer = comboTimer;
     score += 400 * global.comboMultiplier;
-	global.speedModifier += 0.002;
 	var txt = instance_create_depth(obj_dino.x, obj_dino.y, -10, obj_floating_text);
 	bonusJump = 1;
 	image_angle = 20;
 	sprite_index = global.bday ? spr_squirtle_trick : spr_pika_trick;
-	
+	//global.speedModifier += 0.002;
 	with (other)
 	{
 		instance_destroy();
